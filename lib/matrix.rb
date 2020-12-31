@@ -335,6 +335,18 @@ class Matrix
   # Returns element (+i+,+j+) of the matrix.  That is: row +i+, column +j+.
   #
   def [](i, j)
+    if i.is_a? Range
+      # TODO check bounds
+      if j.is_a? Range
+        return Matrix[*i.map{|r| @rows.fetch(r)[j]}]
+      else
+        return Matrix[i.map{|r| @rows.fetch(r)[j]}]
+      end
+    end
+    if j.is_a? Range
+      # TODO check bounds
+      return Matrix[@rows.fetch(i)[j]]
+    end
     @rows.fetch(i){return nil}[j]
   end
   alias element []

@@ -708,6 +708,19 @@ class TestMatrix < Test::Unit::TestCase
     end
   end
 
+  def test_element
+    src = Matrix[
+      [1, 2, 3, 4],
+      [5, 6, 7, 8],
+      [9, 10, 11, 12],
+    ]
+    assert_equal 1,  src[0,0]
+    assert_equal 11, src[2,2]
+    assert_equal Matrix[[6,10]], src[1..2, 1]
+    assert_equal Matrix[[6,7]],  src[1, 1..2]
+    assert_equal Matrix[[6,7],[10,11]], src[1..2, 1..2]
+  end
+
   def test_map!
     m1 = Matrix.zero(2,2)
     m2 = Matrix.build(3,4){|row, col| 1}
